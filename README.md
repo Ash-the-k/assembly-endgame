@@ -9,11 +9,11 @@
 </p>
 
 <p align="center">
-  <a href="https://assembly-endgame-six-phi.vercel.app/"><strong>Live Demo</strong></a>
+  <a href="https://assembly-endgame-six-phi.vercel.app/" target="_blank" rel="noopener noreferrer"><strong>Live Demo</strong></a>
   ·
-  <a href="https://github.com/Ash-the-k/assembly-endgame"><strong>Repository</strong></a>
+  <a href="https://github.com/Ash-the-k/assembly-endgame" target="_blank" rel="noopener noreferrer"><strong>Repository</strong></a>
   ·
-  <a href="./LICENSE"><strong>License</strong></a>
+  <a href="./LICENSE" target="_blank" rel="noopener noreferrer"><strong>License</strong></a>
 </p>
 
 <p align="center">
