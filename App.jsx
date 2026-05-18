@@ -4,19 +4,6 @@ import { languages } from "./languages"
 import { getFarewellText, getRandomWord } from "./utils"
 import Confetti from "react-confetti"
 
-/**
- * Backlog:
- * 
- * ✅ Farewell messages in status section
- * ✅ Disable the keyboard when the game is over
- * ✅ Fix a11y issues
- * ✅ Choose a random word from a list of words
- * ✅ Make the New Game button reset the game
- * ✅ Reveal what the word was if the user loses the game
- * ✅ Confetti drop when the user wins
- * 
- * Challenge: 🎊🎊🎊🎊🎊
- */
 
 export default function AssemblyEndgame() {
     // State values
@@ -24,12 +11,13 @@ export default function AssemblyEndgame() {
     const [guessedLetters, setGuessedLetters] = useState([])
 
     // Derived values
-    const numGuessesLeft = languages.length - 1
+    const numGuesses = languages.length - 1
     const wrongGuessCount =
         guessedLetters.filter(letter => !currentWord.includes(letter)).length
+    const numGuessesLeft = numGuesses - wrongGuessCount
     const isGameWon =
         currentWord.split("").every(letter => guessedLetters.includes(letter))
-    const isGameLost = wrongGuessCount >= numGuessesLeft
+    const isGameLost = wrongGuessCount >= numGuesses
     const isGameOver = isGameWon || isGameLost
     const lastGuessedLetter = guessedLetters[guessedLetters.length - 1]
     const isLastGuessIncorrect = lastGuessedLetter && !currentWord.includes(lastGuessedLetter)
@@ -139,7 +127,7 @@ export default function AssemblyEndgame() {
     }
 
     return (
-        <main>
+        <main className={isGameLost ? "game-lost-shake" : ""}>
             {
                 isGameWon && 
                     <Confetti
@@ -147,11 +135,20 @@ export default function AssemblyEndgame() {
                         numberOfPieces={1000}
                     />
             }
+
+            {isGameLost && <div className="game-over-overlay"></div>}
+            
             <header>
                 <h1>Assembly: Endgame</h1>
                 <p>Guess the word within 8 attempts to keep the
                 programming world safe from Assembly!</p>
             </header>
+
+            <section
+                className="guesses-left"
+            >
+                Number of Languages Left: {numGuessesLeft}
+            </section>
 
             <section
                 aria-live="polite"
@@ -180,7 +177,7 @@ export default function AssemblyEndgame() {
                         `Correct! The letter ${lastGuessedLetter} is in the word.` :
                         `Sorry, the letter ${lastGuessedLetter} is not in the word.`
                     }
-                    You have {numGuessesLeft} attempts left.
+                    You have {languages.length - 1 - wrongGuessCount} attempts left.
                 </p>
                 <p>Current word: {currentWord.split("").map(letter =>
                     guessedLetters.includes(letter) ? letter + "." : "blank.")
