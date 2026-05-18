@@ -134,11 +134,7 @@ export default function AssemblyEndgame() {
 
   function renderGameStatus() {
     if (!isGameOver && isLastGuessIncorrect) {
-      return (
-        <p className="farewell-message">
-          {farewellText}
-        </p>
-      );
+      return <p className="farewell-message">{farewellText}</p>;
     }
 
     if (isGameWon) {
@@ -166,87 +162,88 @@ export default function AssemblyEndgame() {
   }
 
   return (
-    <main className={isGameLost ? 'game-lost-shake' : ''}>
-      {isGameWon && (
-        <Confetti
-          recycle={false}
-          numberOfPieces={1000}
-        />
-      )}
-
+    <>
       {isGameLost && <div className="game-over-overlay"></div>}
+      <main className={isGameLost ? 'game-lost-shake' : ''}>
+        {isGameWon && (
+          <Confetti
+            recycle={false}
+            numberOfPieces={1000}
+          />
+        )}
 
-      <header>
-        <h1>Assembly: Endgame</h1>
-        <p>
-          Guess the word within 8 attempts to keep the programming world safe
-          from Assembly!
-        </p>
-      </header>
+        <header>
+          <h1>Assembly: Endgame</h1>
+          <p>
+            Guess the word within 8 attempts to keep the programming world safe
+            from Assembly!
+          </p>
+        </header>
 
-      <section className="guesses-left">
-        Number of Languages Left: {numGuessesLeft}
-      </section>
+        <section className="guesses-left">
+          Number of Languages Left: {numGuessesLeft}
+        </section>
 
-      <section className={timerContainerClass}>
-        <div className="timer-info">
-          <span>Time Left</span>
-          <span>{timeLeft}s</span>
-        </div>
+        <section className={timerContainerClass}>
+          <div className="timer-info">
+            <span>Time Left</span>
+            <span>{timeLeft}s</span>
+          </div>
 
-        <div className="timer-bar">
-          <div
-            className={timerBarClass}
-            style={{ width: `${timePercentage}%` }}
-          ></div>
-        </div>
-      </section>
+          <div className="timer-bar">
+            <div
+              className={timerBarClass}
+              style={{ width: `${timePercentage}%` }}
+            ></div>
+          </div>
+        </section>
 
-      <section
-        aria-live="polite"
-        role="status"
-        className={gameStatusClass}
-      >
-        {renderGameStatus()}
-      </section>
-
-      <section className="language-chips">{languageElements}</section>
-
-      <section className="word">{letterElements}</section>
-
-      {/* Combined visually-hidden aria-live region for status updates */}
-      <section
-        className="sr-only"
-        aria-live="polite"
-        role="status"
-      >
-        <p>
-          {currentWord.includes(lastGuessedLetter)
-            ? `Correct! The letter ${lastGuessedLetter} is in the word.`
-            : `Sorry, the letter ${lastGuessedLetter} is not in the word.`}
-          You have {languages.length - 1 - wrongGuessCount} attempts left.
-        </p>
-        <p>
-          Current word:{' '}
-          {currentWord
-            .split('')
-            .map((letter) =>
-              guessedLetters.includes(letter) ? letter + '.' : 'blank.',
-            )
-            .join(' ')}
-        </p>
-      </section>
-
-      <section className="keyboard">{keyboardElements}</section>
-
-      {isGameOver && (
-        <button
-          className="new-game"
-          onClick={startNewGame}
+        <section
+          aria-live="polite"
+          role="status"
+          className={gameStatusClass}
         >
-          New Game
-        </button>
-      )}
-    </main>
+          {renderGameStatus()}
+        </section>
+
+        <section className="language-chips">{languageElements}</section>
+
+        <section className="word">{letterElements}</section>
+
+        {/* Combined visually-hidden aria-live region for status updates */}
+        <section
+          className="sr-only"
+          aria-live="polite"
+          role="status"
+        >
+          <p>
+            {currentWord.includes(lastGuessedLetter)
+              ? `Correct! The letter ${lastGuessedLetter} is in the word.`
+              : `Sorry, the letter ${lastGuessedLetter} is not in the word.`}
+            You have {languages.length - 1 - wrongGuessCount} attempts left.
+          </p>
+          <p>
+            Current word:{' '}
+            {currentWord
+              .split('')
+              .map((letter) =>
+                guessedLetters.includes(letter) ? letter + '.' : 'blank.',
+              )
+              .join(' ')}
+          </p>
+        </section>
+
+        <section className="keyboard">{keyboardElements}</section>
+
+        {isGameOver && (
+          <button
+            className="new-game"
+            onClick={startNewGame}
+          >
+            New Game
+          </button>
+        )}
+      </main>
+    </>
   );
 }
