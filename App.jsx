@@ -263,6 +263,29 @@ export default function AssemblyEndgame() {
             New Game
           </button>
         )}
+
+        <footer className="site-footer">
+          <span>
+            Built by{' '}
+            <a
+              href="https://github.com/Ash-the-k"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Ashlesh Kanchan
+            </a>
+          </span>
+
+          <span className="footer-separator">|</span>
+
+          <a
+            href="https://github.com/Ash-the-k/assembly-endgame"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            View Repository
+          </a>
+        </footer>
       </main>
     </>
   );
