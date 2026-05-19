@@ -32,7 +32,7 @@ Every incorrect guess eliminates a programming language from the list. If the pl
 
 ## Features
 
-- **Interactive Gameplay:** A dynamic on-screen keyboard updates based on correct and incorrect guesses.
+- **Interactive Gameplay:** Guess letters using the on-screen keyboard or your physical keyboard.
 
 - **Elimination System:** Incorrect guesses eliminate programming languages from the list.
 

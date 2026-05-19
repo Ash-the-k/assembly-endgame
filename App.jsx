@@ -40,6 +40,24 @@ export default function AssemblyEndgame() {
   // Static values
   const alphabet = 'abcdefghijklmnopqrstuvwxyz';
 
+  useEffect(() => {
+    if (isGameOver) return;
+
+    function handleKeyDown(event) {
+      const key = event.key.toLowerCase();
+
+      if (/^[a-z]$/.test(key)) {
+        addGuessedLetter(key);
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isGameOver, guessedLetters, currentWord]);
+
   function addGuessedLetter(letter) {
     setGuessedLetters((prevLetters) => {
       if (prevLetters.includes(letter)) return prevLetters;
@@ -180,10 +198,6 @@ export default function AssemblyEndgame() {
           </p>
         </header>
 
-        <section className="guesses-left">
-          Number of Languages Left: {numGuessesLeft}
-        </section>
-
         <section className={timerContainerClass}>
           <div className="timer-info">
             <span>Time Left</span>
@@ -206,7 +220,13 @@ export default function AssemblyEndgame() {
           {renderGameStatus()}
         </section>
 
-        <section className="language-chips">{languageElements}</section>
+        <section className="language-panel">
+          <div className="guesses-left">
+            Number of Languages Left: <strong>{numGuessesLeft}</strong>
+          </div>
+
+          <section className="language-chips">{languageElements}</section>
+        </section>
 
         <section className="word">{letterElements}</section>
 
