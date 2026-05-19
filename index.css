@@ -232,6 +232,7 @@ button.new-game {
     padding: 6px 12px;
     display: block;
     margin-inline: auto;
+    margin-bottom: 24px;
     cursor: pointer;
 }
 
