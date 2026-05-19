@@ -328,3 +328,41 @@ button.new-game {
 .footer-separator {
     color: #4A4A4A;
 }
+
+
+@media (min-width: 768px) {
+    header > h1 {
+        font-size: 1.35rem;
+    }
+
+    header > p {
+        font-size: 0.93rem;
+    }
+
+    section.timer-container,
+    section.game-status,
+    section.language-panel {
+        max-width: 375px;
+    }
+
+    section.word > span {
+        height: 44px;
+        width: 44px;
+        font-size: 1.2rem;
+    }
+
+    section.keyboard {
+        max-width: 480px;
+    }
+
+    section.keyboard > button {
+        height: 38px;
+        width: 38px;
+    }
+
+    .timer-info,
+    .language-panel > .guesses-left,
+    .site-footer {
+        font-size: 0.9rem;
+    }
+}
